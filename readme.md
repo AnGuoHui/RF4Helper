@@ -7,7 +7,7 @@ cd /path/RF4Helper
 pip install -r requirements.txt  
 python main.py  
 ## 下载压缩包
-
+[Releases](https://github.com/AnGuoHui/RF4Helper/releases/tag/v0.1.0)
 ## 使用手册
 1. 所有带轮钓组都必需配置彩虹线
 2. 使用赛干/博格尼亚杆必须设置管轮卡，在大风天气，或远距离操作时，推荐使用
