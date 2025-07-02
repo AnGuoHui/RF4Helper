@@ -8,7 +8,7 @@ cd /path/RF4Helper
 pip install -r requirements.txt  
 python main.py  
 ## Download the compressed package
-
+[Releases](https://github.com/AnGuoHui/RF4Helper/releases/tag/v0.1.0)
 ## User Manual
 1. All reel fishing groups must be equipped with rainbow lines
 2. When using the Match/Bolognese rod, a line clip must be set up. It is recommended to use it in windy weather or when operating from a distance
