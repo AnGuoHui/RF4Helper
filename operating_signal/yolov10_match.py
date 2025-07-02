@@ -9,7 +9,6 @@ import os
 logger = logging.getLogger(__name__)
 
 if getattr(sys, 'frozen', False):
-    # pyinstaller --noconsole --onefile --add-data "operating_signal\img_dir;img_dir" --add-data "operating_signal\best.pt;." main.py 
     current_directory = sys._MEIPASS
 else:
     current_directory = os.path.dirname(__file__)
