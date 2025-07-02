@@ -1,4 +1,4 @@
-## Project Introduction [EN]()
+## Project Introduction [CN](https://github.com/AnGuoHui/RF4Helper/blob/main/readme.md)
 This script supports operations for all types of fishing gear, supports bilingual (Chinese and English) clients, and provides automatic preparation/feeding operations, aiming to simplify   
 repetitive operations in the capture process.If there are catches beyond the pulling range of the fishing gear, manual intervention should be carried out; otherwise, there is a risk of damaging the fishing gear
 
