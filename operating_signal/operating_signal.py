@@ -34,9 +34,9 @@ line_005 = os.path.join(current_directory, 'static\common', 'line_005.png')
 # 可抛投标志
 rod_isok = os.path.join(current_directory, get_current_directory_by_language(), 'rod_isok.png')
 # 达标标志
-qualified_mark = os.path.join(current_directory, 'static\common', 'qualified_mark.png')
-# 入户标志
-keepnet_mark = os.path.join(current_directory, get_current_directory_by_language(), 'keepnet_mark.png')
+qualified_mark = os.path.join(current_directory, get_current_directory_by_language(), 'qualified_mark.png')
+# 入户标志--上稀有出的动画会遮盖部分画面，以不被遮盖的部分替换--稀有图标的加载比之前延迟，应当做对应处理
+keepnet_mark = os.path.join(current_directory, 'static\common', 'keepnet_mark.png')
 # 入户加载-网络情况差的时候会出现
 keepnet_loading = os.path.join(current_directory, get_current_directory_by_language(), 'keepnet_loading.png')
 # 设备未组装标志
@@ -48,9 +48,9 @@ keepnet_100 = os.path.join(current_directory, 'static\common', 'keepnet_100.png'
 # 满户预留标志
 keepnet_95 = os.path.join(current_directory, 'static\common', 'keepnet_95.png')
 # 普通稀有标志
-rare_mark = os.path.join(current_directory, 'static\common', 'rare_mark.png')
-# 普通稀有标志
-rare_rare_mark = os.path.join(current_directory, 'static\common', 'rare_rare_mark.png')
+rare_mark = os.path.join(current_directory, get_current_directory_by_language(), 'rare_mark.png')
+# 超级稀有标志
+rare_rare_mark = os.path.join(current_directory, get_current_directory_by_language(), 'rare_rare_mark.png')
 # 插地失败标志
 placement_erro_0 = os.path.join(current_directory, get_current_directory_by_language(), 'placement_erro_0.png')
 placement_erro_1 = os.path.join(current_directory, get_current_directory_by_language(), 'placement_erro_1.png')
@@ -67,7 +67,6 @@ crafting_missing_material = os.path.join(current_directory, get_current_director
 
 change_path_with_language = {
     'rod_isok':rod_isok,
-    'keepnet_mark':keepnet_mark,
     'keepnet_loading':keepnet_loading,
     'rod_not_ready':rod_not_ready,
     'placement_erro_0':placement_erro_0,
@@ -77,11 +76,13 @@ change_path_with_language = {
     'crafting_ok':crafting_ok,
     'crafting_fail':crafting_fail,
     'crafting_missing_material':crafting_missing_material,
+    'qualified_mark':qualified_mark,
+    'rare_mark':rare_mark,
+    'rare_rare_mark':rare_rare_mark,
 }
 
 def update_file_path():
     change_path_with_language['rod_isok'] = os.path.join(current_directory, get_current_directory_by_language(), 'rod_isok.png')
-    change_path_with_language['keepnet_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'keepnet_mark.png')
     change_path_with_language['keepnet_loading'] = os.path.join(current_directory, get_current_directory_by_language(), 'keepnet_loading.png')
     change_path_with_language['rod_not_ready'] = os.path.join(current_directory, get_current_directory_by_language(), 'rod_not_ready.png')
     change_path_with_language['placement_erro_0'] = os.path.join(current_directory, get_current_directory_by_language(), 'placement_erro_0.png')
@@ -91,6 +92,9 @@ def update_file_path():
     change_path_with_language['crafting_ok'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok.png')
     change_path_with_language['crafting_fail'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_fail.png')
     change_path_with_language['crafting_missing_material'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_missing_material.png')
+    change_path_with_language['qualified_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'qualified_mark.png')
+    change_path_with_language['rare_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'rare_mark.png')
+    change_path_with_language['rare_rare_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'rare_rare_mark.png')
 
 # 画面反馈匹配 默认匹配阈值0.8 比对中鱼等画面状态变化
 def match_result(template_path, threshold=0.8):
@@ -200,13 +204,13 @@ def get_rod_isok_signal():
 
 # 达标信号
 def get_qualified_mark_signal():
-    result = match_result(qualified_mark,0.91)
+    result = match_result(change_path_with_language['qualified_mark'],0.91)
     logger.debug('get_qualified_mark_signal=%s',result)
     return result
 
 # 抄到鱼信号
 def get_keepnet_mark_signal():
-    result = match_result(change_path_with_language['keepnet_mark'])
+    result = match_result(keepnet_mark)
     logger.debug('get_keepnet_mark_signal=%s',result)
     return result
 
@@ -236,13 +240,13 @@ def get_keepnet_95_signal():
 
 # 稀有鱼标志
 def get_rare_mark_signal():
-    result = match_result(rare_mark,0.95)
+    result = match_result(change_path_with_language['rare_mark'],0.95)
     logger.debug('get_rare_mark_signal=%s',result)
     return result
 
 # 超级稀有鱼标志
 def get_rare_rare_mark_signal():
-    result = match_result(rare_rare_mark,0.95)
+    result = match_result(change_path_with_language['rare_rare_mark'],0.95)
     logger.debug('get_rare_rare_mark_signal=%s',result)
     return result
 

@@ -144,6 +144,7 @@ class MyLogger:
             'wait_roll_line_finsh': "等待收线完成。。。",
             'rod_not_ready_do_nothing': "鱼竿状态异常。。。",
             'rod_not_ready_do_check': "抛投准备状态异常，请检查。。。",
+            're_throw_check': "抛投准备状态异常，重新检查尝试，等待1秒。。。",
 
             'crafting_succ': "制作完成，已完成{}/{}个物品,失败{}次",
             'crafting_fail': "制作失败，已完成{}/{}个物品,失败{}次",
@@ -268,6 +269,7 @@ class MyLogger:
             'wait_roll_line_finsh': "wait roll line finsh..",
             'rod_not_ready_do_nothing': "rod not ready...",
             'rod_not_ready_do_check': "rod not ready for casting,please check...",
+            're_throw_check': "rod not ready for casting,waiting 1 sec for re_check...",
 
             'crafting_succ': "crafting succ,complete :{}/{}items,fail{}",
             'crafting_fail': "crafting fail,complete :{}/{}items,fail{}",

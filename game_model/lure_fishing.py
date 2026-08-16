@@ -126,7 +126,7 @@ class LureFishing(BaseFishing):
         while rod_staus and not config.stop_signal:
             # 漂钓操作
             rod_staus = script.float_downstream_roll(lure_config.l_float_downstream_rethrow_time,lure_config.l_float_downstream_rethrow_time_offset,lure_config.l_check_keep_all_fish,lure_config.l_check_fishon_whith_shift)
-            MyLogger.print(logger,logging.error.__name__,'float_downstream_complet')
+            MyLogger.print(logger,logging.info.__name__,'float_downstream_complet')
             # 如果鱼竿状态正常，收完就进行下一次抛投
             if rod_staus and not config.stop_signal:
                 rod_staus = script.base_rod_on_hand_throw(lure_config.l_strength,lure_config.l_check_isfull,lure_config.l_throw_offset,lure_config.l_wait_time,lure_config.l_wait_time_offset)

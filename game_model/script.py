@@ -89,13 +89,13 @@ def base_rod_single_step(strength=0.8,isfull=False,offset=0,wait_line_fly=0,wait
 # 重复丢，杆子在手上
 def base_rod_on_hand_throw(strength=0.8,isfull=False,offset=0,wait_line_fly=0,wait_line_fly_offset=0):
     can_throw_flg=True
-    wait_random_time(0.1,0.2)
+    wait_random_time(0.8,0.2)
     return base_throw_whith_rod_check(can_throw_flg,strength,isfull,offset,wait_line_fly,wait_line_fly_offset)
 
 # 重复丢，插地
 def base_rod_on_ground_throw(strength=0.8,isfull=False,offset=0,close_wheel=True,wait_line_fly=0,wait_line_fly_offset=0):
     can_throw_flg=True
-    wait_random_time(0.1,0.2)
+    wait_random_time(0.8,0.2)
     can_throw_flg = base_throw_whith_rod_check(can_throw_flg,strength,isfull,offset)
     # 等待饵入水
     wait_random_time(wait_line_fly,wait_line_fly_offset)
@@ -639,7 +639,15 @@ def base_check():
 
 # 抛投前的检查，确认可以丢杆
 def throw_check():
-    return op.get_rod_isok_signal()
+    if op.get_rod_isok_signal():
+        return True
+    else:
+        for _ in range(3):
+            MyLogger.print(logger,logging.info.__name__,'re_throw_check')
+            time.sleep(1)
+            if op.get_rod_isok_signal():
+                return True
+        return False
 
 # 中鱼信号检查
 def on_fish_check():
@@ -713,9 +721,11 @@ def base_throw_whith_rod_check(can_throw_flg,strength,isfull=False,offset=0,wait
 # 收鱼入户判断
 def keep_fish_check(keep_all_fish = False):
     MyLogger.print(logger,logging.info.__name__,'keep_fish_start')
+    # 等待数据加载完全，出稀有的动画会延迟get_rare_mark_signal和get_rare_rare_mark_signal的捕获，导致未识别信号放生
+    wait_random_time(1,0.5)
     # 满户判断
     if config.keepnet_100:
-        pyautogui.press('backspace')
+        keypress('backspace')
         MyLogger.print(logger,logging.info.__name__,'keepnet_full')
     else:
         if config.keepnet_95:
@@ -724,7 +734,7 @@ def keep_fish_check(keep_all_fish = False):
                 pyautogui.press('space')
                 MyLogger.print(logger,logging.info.__name__,'keepnet_add_rare_fish')
             else:
-                pyautogui.press('backspace')
+                keypress('backspace')
                 MyLogger.print(logger,logging.info.__name__,'relese_normal_fish')
         else:
            keep_fish(keep_all_fish)
@@ -736,10 +746,10 @@ def keep_fish(keep_all_fish = False):
     if keep_all_fish:
         pyautogui.press('space')
     else:
-        if op.get_qualified_mark_signal():
+        if op.get_qualified_mark_signal() or op.get_rare_mark_signal() or op.get_rare_rare_mark_signal():
             pyautogui.press('space')
         else:
-            pyautogui.press('backspace')
+            keypress('backspace')
 
 # 检查当前位置能否插地
 def rod_placement_check(rodnum = -1):
@@ -773,7 +783,7 @@ def rod_placement_check(rodnum = -1):
             MyLogger.print(logger,logging.info.__name__,'rod_placement_fail_and_mark_notready',rodnum+1)
             config.rod_status[rodnum] =False
             # 收起杆子  进行下一次循环
-            pyautogui.press('backspace')
+            keypress('backspace')
             placement_check_result = False
     MyLogger.print(logger,logging.info.__name__,'rod_placement_check_result',rodnum+1,placement_check_result)
     return placement_check_result
@@ -876,3 +886,8 @@ def do_crafting(crafting_total:int):
 #拟人/阻塞操作
 def wait_random_time(start:float,offset:float) -> None:
     time.sleep(random.uniform(start, start+offset))
+
+#直接使用pyautogui.press('backspace')可能会出现两次按键操作
+def keypress(key:str) ->None:
+    pyautogui.keyDown(key)
+    pyautogui.keyUp(key)
