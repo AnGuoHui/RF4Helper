@@ -59,7 +59,8 @@ disconnect_mark = os.path.join(current_directory, get_current_directory_by_langu
 # 选择船票
 choose_ticket = os.path.join(current_directory, get_current_directory_by_language(), 'choose_ticket.png')
 # 制作完成标志
-crafting_ok = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok.png')
+crafting_ok_0 = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok_0.png')
+crafting_ok_1 = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok_1.png')
 # 制作失败标志
 crafting_fail = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_fail.png')
 # 制作缺失材料标志
@@ -73,7 +74,8 @@ change_path_with_language = {
     'placement_erro_1':placement_erro_1,
     'disconnect_mark':disconnect_mark,
     'choose_ticket':choose_ticket,
-    'crafting_ok':crafting_ok,
+    'crafting_ok_0':crafting_ok_0,
+    'crafting_ok_1':crafting_ok_1,
     'crafting_fail':crafting_fail,
     'crafting_missing_material':crafting_missing_material,
     'qualified_mark':qualified_mark,
@@ -89,7 +91,8 @@ def update_file_path():
     change_path_with_language['placement_erro_1'] = os.path.join(current_directory, get_current_directory_by_language(), 'placement_erro_1.png')
     change_path_with_language['disconnect_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'disconnect_mark.png')
     change_path_with_language['choose_ticket'] = os.path.join(current_directory, get_current_directory_by_language(), 'choose_ticket.png')
-    change_path_with_language['crafting_ok'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok.png')
+    change_path_with_language['crafting_ok_0'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok_0.png')
+    change_path_with_language['crafting_ok_1'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_ok_1.png')
     change_path_with_language['crafting_fail'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_fail.png')
     change_path_with_language['crafting_missing_material'] = os.path.join(current_directory, get_current_directory_by_language(), 'crafting_missing_material.png')
     change_path_with_language['qualified_mark'] = os.path.join(current_directory, get_current_directory_by_language(), 'qualified_mark.png')
@@ -284,9 +287,11 @@ def get_choose_ticket_signal():
 
 # 制作完成
 def get_crafting_ok_signal():
-    result = match_result(change_path_with_language['crafting_ok'])
-    logger.debug('get_crafting_ok_signal=%s',result)
-    return result
+    result_0 = match_result(change_path_with_language['crafting_ok_0'])
+    logger.debug('get_crafting_ok_0_signal=%s',result_0)
+    result_1 = match_result(change_path_with_language['crafting_ok_1'])
+    logger.debug('get_crafting_ok_1_signal=%s',result_1)
+    return result_0 or result_1
 
 # 制作失败
 def get_crafting_fail_signal():

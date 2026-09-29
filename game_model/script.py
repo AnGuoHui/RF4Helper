@@ -595,12 +595,17 @@ def roll_line_and_judge(keep_all_fish=False,press = False):
                 if try_times < 9:
                     MyLogger.print(logger,logging.info.__name__,'catch_fish_miss_fish_on_singl_wait_roll_line_finish')
                     wait_random_time(try_times,config.default_interval)
-                    try_times += 1
                     # 尝试抄鱼
                     pyautogui.press('space')
                 else:
                     MyLogger.print(logger,logging.info.__name__,'script_need_help')
-                    wait_random_time(1,config.default_interval)              
+                    wait_random_time(1,config.default_interval)
+                    #长时间的收线完成标志未获取，可能出现卡在抛投动作中的情况，松开左键重新按下尝试完成收线
+                    if try_times > 12:
+                        pyautogui.mouseUp(button='right')
+                        wait_random_time(1,config.default_interval)
+                        pyautogui.mouseDown(button='right')       
+                try_times += 1       
         pyautogui.mouseUp(button='right')
         if press:
             pyautogui.mouseUp(button='left')
